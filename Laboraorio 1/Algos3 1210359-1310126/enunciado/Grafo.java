@@ -4,10 +4,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Grafo{
 
-	private double matrizAdyacencia[][];
+	private int matrizAdyacencia[][];
 	private int numeroDeVertices;
 	private int numeroDeAristas;
 	private String linea;
@@ -17,7 +18,7 @@ public class Grafo{
 		/*Abrir y leer archivo txt, se va leyendo linea por linea*/
 		BufferedReader in = new BufferedReader(new FileReader(archivo));
     	numeroDeVertices = Integer.parseInt(in.readLine());
-		matrizAdyacencia = new double[numeroDeVertices][numeroDeVertices];
+		matrizAdyacencia = new int[numeroDeVertices][numeroDeVertices];
     	numeroDeAristas = Integer.parseInt(in.readLine());
     	for (int p=0;p<numeroDeVertices;p++){
     		for(int q=0;q<numeroDeVertices;q++){
@@ -42,7 +43,7 @@ public class Grafo{
 		System.out.println();
 	}
 	}
-
+/*
 	public void mAdyacencia(){
 
 		for (int i = 0; i < matrizAdyacencia.length; i++){
@@ -52,10 +53,29 @@ public class Grafo{
 					
 				}
 				else {
-					matrizAdyacencia[i][j] = Double.POSITIVE_INFINITY;
+					matrizAdyacencia[i][j] = int.POSITIVE_INFINITY;
 				}
 			}
 		}
+	}
+
+*/
+
+	public int[][] warshall(){
+	 int [][] camino;
+		int n = matrizAdyacencia.length;
+		camino = Arrays.copyOf(matrizAdyacencia,n);
+		for (int i = 0; i < n ; i++) {
+			for (int j = 0; j < n ; j++ ) {
+				for (int k = 0; k < n  ; k++) {
+					if (camino[j][i] ==camino[i][k]) {
+						camino [j][k] = 1; 
+					}
+				}
+				
+			}
+		}
+		return camino;
 	}
 
 	}

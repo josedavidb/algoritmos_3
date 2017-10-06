@@ -22,17 +22,28 @@ public class Ruta{
     /*Creacion del objeto grafo por el archivo txt*/
     Grafo miGrafo = new Grafo(nombreArchivoEntrada);
     miGrafo.imprimirGrafo(); //Imprimimos la matriz para confirmar (LUEGO BORRAR ESTA LINEA)
+    int [][] matrizRoyWarshall;
+    matrizRoyWarshall= miGrafo.warshall();
+    System.out.println("Esta es la warshall");
+    for(int k=0;k<matrizRoyWarshall.length;k++){
+    	for(int l=0;l<matrizRoyWarshall.length;l++){
+    		System.out.print(matrizRoyWarshall[k][l]);
+    	}
+    	System.out.println();
+    }
+    
 
 }
 
 
-	private double[][] grafo;
+	private int[][] grafo;
 	
 	public Ruta(int n){
-		this.grafo = new double[n][n];
-		mAyacencia();
+		this.grafo = new int[n][n];
+		//mAyacencia();
 	}
 
+/*
 	private void mAyacencia(){
 
 		for (int i = 0; i < grafo.length; i++){
@@ -42,18 +53,18 @@ public class Ruta{
 					
 				}
 				else {
-					grafo[i][j] = Double.POSITIVE_INFINITY;
+					grafo[i][j] = INT.POSITIVE_INFINITY;
 				}
 			}
 		}
 	}
-
-	public void Adyacente(int ini, int fin, double tamaño){
+*/
+	public void Adyacente(int ini, int fin, int tamaño){
 		grafo[ini][fin] = tamaño;
 	}
 
-	public double[][] warshall(){
-		double [][] camino;
+	public int[][] warshall(){
+	 int [][] camino;
 		int n = this.grafo.length;
 		camino = Arrays.copyOf(this.grafo,n);
 		for (int i = 0; i < n ; i++) {
