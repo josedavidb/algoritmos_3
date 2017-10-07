@@ -1,3 +1,10 @@
+/*Laboratorio de Algoritmos y Estructuras 3
+Laboratorio 1 
+Jose Basanta 13-10125
+Jesus Marcano 12-10359
+
+*/
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
@@ -8,10 +15,10 @@ import java.util.Arrays;
 
 public class Grafo{
 
-	private int matrizAdyacencia[][];
-	private int numeroDeVertices;
-	private int numeroDeAristas;
-	private String linea;
+	private int matrizAdyacencia[][]; //Matriz de adyacencia asociada al grafo
+	private int numeroDeVertices; //Numero de vertices del grafo
+	private int numeroDeAristas; //Numero de aristas del grafo
+	private String linea; //Lineas del archivo de texto
 
 
 	public Grafo(String archivo) throws IOException{
@@ -43,33 +50,20 @@ public class Grafo{
 		System.out.println();
 	}
 	}
-/*
-	public void mAdyacencia(){
 
-		for (int i = 0; i < matrizAdyacencia.length; i++){
-			for (int j = 0; j < matrizAdyacencia.length ; j++) {
-				if (i == j) {
-					matrizAdyacencia[i][j] = 0;
-					
-				}
-				else {
-					matrizAdyacencia[i][j] = int.POSITIVE_INFINITY;
-				}
-			}
-		}
-	}
-
-*/
 
 	public int[][] warshall(){
+		/*Algoritmo de Roy-warshall.
+		Devuelve una matriz donde es 1 si existe camino entre dos vertices*/
 	 int [][] camino;
+	 	camino2 = new int[matrizAdyacencia.length][matrizAdyacencia.length];
 		int n = matrizAdyacencia.length;
 		camino = Arrays.copyOf(matrizAdyacencia,n);
 		for (int i = 0; i < n ; i++) {
 			for (int j = 0; j < n ; j++ ) {
 				for (int k = 0; k < n  ; k++) {
-					if (camino[j][i] ==camino[i][k]) {
-						camino [j][k] = 1; 
+					if (camino[j][k]!=1) {
+						camino [j][k] = camino[j][i] & camino[i][k];
 					}
 				}
 				
@@ -78,4 +72,7 @@ public class Grafo{
 		return camino;
 	}
 
-	}
+	
+	
+
+}
